@@ -27,7 +27,6 @@ Content-Type: application/json
 }
 
 
-
 ### UPDATE habit
 PUT http://localhost:3000/habits/697b425693444dd18b8e630c
 Content-Type: application/json
@@ -45,6 +44,24 @@ Content-Type: application/json
 }
 
 
-
 ### DELETE habit
 DELETE http://localhost:3000/habits/697b425693444dd18b8e630c
+
+
+### GET all journal entries
+GET http://localhost:3000/journal
+
+
+### CREATE journal entry
+POST http://localhost:3000/journal
+Content-Type: application/json
+
+{
+  "userId": "TEMP_USER_ID",
+  "title": "Feeling focused",
+  "content": "Today I felt more focused while working on my backend project.",
+  "emotion": "focus",
+  "intensity": 4,
+  "visibility": "private",
+  "createdAt": "2026-01-29T10:30:00Z"
+}

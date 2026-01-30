@@ -1,5 +1,7 @@
 const express = require('express');
 require('dotenv').config();
+const swaggerUi = require('swagger-ui-express');
+const swaggerDocument = require('./swagger.json');
 const mongodb = require('./src/data/database');
 const app = express();
 
@@ -20,6 +22,9 @@ app.use((req, res, next) => {  //CORS to allow use API from browser or fronted
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   next();
 });
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+
 
 app.use('/', require('./src/routes'));
 

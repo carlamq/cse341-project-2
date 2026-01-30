@@ -1,16 +1,15 @@
-const swaggerAutoGen = require('swagger-autogen')();
+const swaggerAutogen = require('swagger-autogen')();
 
-const doc = {
-    info: {
-        title: 'Contacts API',
-        description: 'Contacts API'
+const doc = { 
+    info: {   
+        title: 'Mind Habit Tracker API',   
+        description: 'API for tracking habits and journal entries'
     },
-    host: 'localhost:3000',
+    host: 'localhost:3000', 
     schemes: ['http', 'https']
 };
 
 const outputFile = './swagger.json';
-const endpointsFile = ['./src/routes/index.js'];
+const endpointsFiles = ['./server.js'];
 
-// tis will generate swagger json
-swaggerAutoGen(outputFile, endpointsFile, doc);
+swaggerAutogen(outputFile, endpointsFiles, doc);
