@@ -1,1 +1,12 @@
+### Root – API status
 GET http://localhost:3000/
+
+###
+
+### Get all habit logs
+GET http://localhost:3000/habits
+
+###
+
+### Get single habit log (replace with a real _id)
+GET http://localhost:3000/habits/REPLACE_WITH_ID
