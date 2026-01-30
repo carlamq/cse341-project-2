@@ -39,7 +39,57 @@ const getSingle = async (req, res) => {
     }
 };
 
+const createHabit = async (req, res) => {
+    try {
+        //#swagger.tags=['Habits']
+        const habit = req.body;
+        const response = await mongodb.getDb().collection('habitLogs').insertOne(habit);
+        if (response.acknowledged) {
+            res.status(201).json({ id: response.insertedId });
+        } else {
+            res.status(500).json({ message: 'Failed to create habit log' });
+        }
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
+};
+
+const updateHabit = async (req, res) => {
+    try {
+        //#swagger.tags=['Habits']
+        const habitId = new ObjectId(req.params.id);
+        const habit = req.body;
+        const response = await mongodb.getDb().collection('habitLogs').replaceOne({ _id: habitId }, habit);
+        if (response.matchedCount > 0) {
+            res.status(204).send();
+        } else {
+            res.status(404).json({ message: 'Habit not found' });
+        }
+    } catch (err) {
+        res.status(400).json({ message: 'Invalid habit id' });
+    }
+};
+
+const deleteHabit = async (req, res) => {
+    try {
+        //#swagger.tags=['Habits']
+        const habitId = new ObjectId(req.params.id);
+        const response = await mongodb.getDb().collection('habitLogs').deleteOne({ _id: habitId });
+        if (response.deletedCount > 0) {
+        res.status(204).send();
+        } else {
+        res.status(404).json({ message: 'Habit not found' });
+        }
+    } catch (err) {
+        res.status(400).json({ message: 'Invalid habit id' });
+    }
+};
+
+
 module.exports = {
     getAllHabits,
-    getSingle
+    getSingle,
+    createHabit,
+    updateHabit,
+    deleteHabit
 };

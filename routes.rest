@@ -1,12 +1,50 @@
 ### Root – API status
 GET http://localhost:3000/
 
-###
 
 ### Get all habit logs
 GET http://localhost:3000/habits
 
-###
 
-### Get single habit log (replace with a real _id)
+### Get single habit log
 GET http://localhost:3000/habits/697b425693444dd18b8e630c
+
+
+### CREATE habit
+POST http://localhost:3000/habits
+Content-Type: application/json
+
+{
+  "userId": "TEMP_USER_ID",
+  "date": "2026-01-29",
+  "sleepHours": 7,
+  "exerciseMinutes": 30,
+  "waterIntake": 1800,
+  "energyLevel": 4,
+  "mood": "focused",
+  "stressLevel": 2,
+  "notes": "Completed habits CRUD"
+}
+
+
+
+### UPDATE habit
+PUT http://localhost:3000/habits/697b425693444dd18b8e630c
+Content-Type: application/json
+
+{
+  "userId": "TEMP_USER_ID",
+  "date": "2026-01-29",
+  "sleepHours": 8,
+  "exerciseMinutes": 40,
+  "waterIntake": 2000,
+  "energyLevel": 5,
+  "mood": "productive",
+  "stressLevel": 1,
+  "notes": "Updated habit"
+}
+
+
+
+### DELETE habit
+DELETE http://localhost:3000/habits/697b425693444dd18b8e630c
