@@ -5,10 +5,9 @@
     "description": "API for tracking habits and journal entries",
     "version": "1.0.0"
   },
-  "host": "localhost:3000",
+  "host": "cse341-project-2-cegf.onrender.com",
   "basePath": "/",
   "schemes": [
-    "http",
     "https"
   ],
   "paths": {
