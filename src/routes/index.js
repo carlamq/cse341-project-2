@@ -5,5 +5,5 @@ router.get('/', (req, res) => {
 });
 
 router.use('/habits', require('./habits'));
-
+router.use('/journal', require('./journal'));
 module.exports = router;
