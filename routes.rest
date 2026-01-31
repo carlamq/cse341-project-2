@@ -72,7 +72,7 @@ Content-Type: application/json
   "createdAt": "2026-01-29T10:30:00Z"
 }
 
-### CREATE journal entry
+### UPDATE journal entry
 PUT http://localhost:3000/journal/697b425693444dd18b8e630c
 Content-Type: application/json
 
