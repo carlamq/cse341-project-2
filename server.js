@@ -6,6 +6,7 @@ const mongodb = require('./src/data/database');
 const passport = require('passport');
 const session = require('express-session');
 const GitHubStrategy = require('passport-github2').Strategy;
+const isProd = process.env.NODE_ENV === 'production';
 const app = express();
 
 const port = process.env.PORT || 3000;
@@ -18,11 +19,17 @@ app.get('/', (req, res) => {
 
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
+app.set('trust proxy', 1);
+
 app.use(
     session({
         secret: process.env.SESSION_SECRET || 'default_secret_change_me',
         resave: false,
-        saveUninitialized: false
+        saveUninitialized: false,
+        cookie: {
+            secure: isProd,
+            sameSite: isProd ? 'none' : 'lax'
+        }
     })
 );
 

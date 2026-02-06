@@ -16,14 +16,18 @@ router.get('/github',
 );
 
 // GitHub OAuth callback
-router.get('/github/callback',
-    passport.authenticate('github', { failureRedirect: '/api-docs' }),
-    (req, res) => {
-       // Passport put the user in req.user  
-        eq.session.user = req.user;
-        res.redirect('/auth/status');
-    }
-);
+router.get('/github/callback', (req, res, next) => {  
+    passport.authenticate('github', (err, user) => {  
+        if (err) {     
+            console.error('OAuth callback error:', err);     
+            return res.status(500).json({ message: 'OAuth callback failed', error: err.message });   
+        }   
+        if (!user) return res.redirect('/api-docs');  
+        req.session.user = user;   
+        return res.redirect('/auth/status');
+    })(req, res, next);
+});
+
 
 // Logout
 router.post('/logout', (req, res) => {
